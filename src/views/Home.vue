@@ -27,11 +27,15 @@
         </table>
     </main>
     <Copyright></Copyright>
+    <div class="layer">
+        <Create></Create>
+    </div>
 </div>
 </template>
 <script>
 import Banner from '../components/Header';
 import Copyright from '../components/Footer';
+import Create from '../components/Create';
 export default {
     data () {
         return {
@@ -41,7 +45,7 @@ export default {
             ]
         };
     },
-    components: { Banner, Copyright }
+    components: { Banner, Copyright, Create }
 }
 </script>
 <style>
@@ -94,19 +98,19 @@ tr:hover span:hover {
 .last-row:hover {
     background-color: transparent;
 }
-.modify {
+.body .modify {
     visibility: hidden;
     display: inline-block;
     padding: 3px;
     color: #a3a3a3;
 }
-.delete {
+.body .delete {
     visibility: hidden;
     display: inline-block;
     padding: 3px;
     color: #a3a3a3;
 }
-.create {
+.body .create {
     display: inline-block;
     padding: 3px;
     color: #a3a3a3;
