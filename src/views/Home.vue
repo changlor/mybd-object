@@ -10,11 +10,11 @@
                 <th>Email</th>
                 <th>操作</th>
             </tr>
-            <tr>
-                <td>James Bond</td>
-                <td>30</td>
-                <td>男</td>
-                <td>james.bond@secreagent.com</td>
+            <tr v-for="person in persons">
+                <td>{{ person.name }}</td>
+                <td>{{ person.age }}</td>
+                <td>{{ person.sex }}</td>
+                <td>{{ person.email }}</td>
                 <td><span class="modify">修改</span><span class="delete">删除</span></td>
             </tr>
             <tr class="last-row">
@@ -33,9 +33,15 @@
 import Banner from '../components/Header';
 import Copyright from '../components/Footer';
 export default {
-    components: {
-        Banner, Copyright
-    }
+    data () {
+        return {
+            persons: [
+                { name: 'James Bond', age: 30, sex: '男', email: 'james.bond@secreagent.com' },
+                { name: 'Angelina Jolie', age: 40, sex: '女', email: 'i-dont-tell-anyone@somewhere' }
+            ]
+        };
+    },
+    components: { Banner, Copyright }
 }
 </script>
 <style>
@@ -62,7 +68,16 @@ td {
 th {
     padding: 0 20px;
 }
-
+tr:hover {
+    background-color: #fffef5;
+}
+tr:hover span {
+    visibility: visible;
+    opacity: 0.6;
+}
+tr:hover span:hover {
+    opacity: 1;
+}
 .first-row {
     height: 66px;
     font-size: 20px;
@@ -70,15 +85,23 @@ th {
     border-bottom: 0;
     background-color: #dbf3ff;
 }
+.first-row:hover {
+    background-color: #dbf3ff;
+}
 .last-row {
     border: 0;
 }
+.last-row:hover {
+    background-color: transparent;
+}
 .modify {
+    visibility: hidden;
     display: inline-block;
     padding: 3px;
     color: #a3a3a3;
 }
 .delete {
+    visibility: hidden;
     display: inline-block;
     padding: 3px;
     color: #a3a3a3;
