@@ -110,5 +110,6 @@ tr:hover span:hover {
     display: inline-block;
     padding: 3px;
     color: #a3a3a3;
+    opacity: 0.6;
 }
 </style>
