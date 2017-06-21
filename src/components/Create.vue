@@ -2,7 +2,9 @@
 <div class="layer">
     <div class="shadow"></div>
     <div class="create">
-        <div class="title">添加人员信息</div>
+        <div class="title">
+            <span>添加人员信息</span><div class="cancel">X</div>
+        </div>
         <ul class="items">
             <li>
                 <div class="info name">
@@ -28,6 +30,7 @@
                     <div class="info-input">
                         <label><input name="sex" type="radio" value="1" /> 男</label>
                         <label><input name="sex" type="radio" value="0" /> 女</label>
+                        <div>&nbsp;</div>
                     </div>
                 </div>
             </li>
@@ -76,6 +79,7 @@
     background-color: #fff;
     text-align: left;
     color: #333;
+    box-shadow: 1px 2px 1px #666;
 }
 .items {
     padding: 0;
@@ -83,8 +87,11 @@
 }
 .items li {
     list-style: none;
-    padding: 10px;
+    padding: 4px;
     font-size: 18px;
+}
+.items li:last-child {
+    margin-top: 10px;
 }
 .info-type {
     display: inline-block;
@@ -105,26 +112,37 @@
 }
 .create .title {
     font-size: 24px;
+    margin-bottom: 25px;
+    display: flex;
+}
+.title .cancel {
+    flex: 1;
+    text-align: right;
+    font-size: 35px;
+    color: #c2c2c2;
 }
 .email .info-type {
     font-weight: bold;
 }
 .operate {
     text-align: right;
-    padding-right: 27px;
+}
+.operate span {
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 0 3px;
+    border-radius: 2px;
 }
 .operate .submit {
-    padding: 5px;
-    display: inline-block;
     background-color: #caf1ff;
-    margin: 0 3px;
     color: #757575;
 }
 .operate .cancel {
-    padding: 5px;
-    display: inline-block;
     background-color: #f5f5f5;
-    margin: 0 3px;
     color: #a3a3a3;
+}
+font {
+    font-size: 14px;
+    color: #ed7c7c;
 }
 </style>
