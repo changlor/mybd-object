@@ -14,6 +14,12 @@ const routerOptions = {
 }
 // 实例化vue-router
 const router = new VueRouter(routerOptions);
+// router.beforeEach((to, from, next) => {
+//     if (to.path == '/') {
+//         next('home')
+//     }
+//     next();
+// })
 // 配置参数
 const options = {
     appOptions: {

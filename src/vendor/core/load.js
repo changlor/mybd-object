@@ -10,7 +10,7 @@ import helper from './components/helper';
 export default {
     appSetting: {
         components: {
-            delegation, hook, memory, helper
+            delegation, hook, memory
         }
     }
 };
