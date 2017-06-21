@@ -28,7 +28,9 @@
     </main>
     <Copyright></Copyright>
     <div class="layer">
-        <Create></Create>
+        <!-- <Create></Create> -->
+        <!-- <Modify></Modify> -->
+        <Delete></Delete>
     </div>
 </div>
 </template>
@@ -36,6 +38,9 @@
 import Banner from '../components/Header';
 import Copyright from '../components/Footer';
 import Create from '../components/Create';
+import Modify from '../components/Modify';
+import Delete from '../components/Delete';
+
 export default {
     data () {
         return {
@@ -45,7 +50,7 @@ export default {
             ]
         };
     },
-    components: { Banner, Copyright, Create }
+    components: { Banner, Copyright, Create, Modify, Delete }
 }
 </script>
 <style scoped>
