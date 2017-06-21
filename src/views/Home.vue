@@ -48,10 +48,7 @@ export default {
     components: { Banner, Copyright, Create }
 }
 </script>
-<style>
-body {
-    margin: 0;
-}
+<style scoped>
 main.body {
     padding: 80px;
     margin: 0 160px;
@@ -98,19 +95,19 @@ tr:hover span:hover {
 .last-row:hover {
     background-color: transparent;
 }
-.body .modify {
+.modify {
     visibility: hidden;
     display: inline-block;
     padding: 3px;
     color: #a3a3a3;
 }
-.body .delete {
+.delete {
     visibility: hidden;
     display: inline-block;
     padding: 3px;
     color: #a3a3a3;
 }
-.body .create {
+.create {
     display: inline-block;
     padding: 3px;
     color: #a3a3a3;

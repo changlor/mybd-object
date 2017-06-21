@@ -3,30 +3,53 @@
     <div class="shadow"></div>
     <div class="create">
         <div class="title">添加人员信息</div>
-        <div class="option name">
-            <span>姓名</span><input class="input" />
-            <font color="red">姓名不能为空</font>
-        </div>
-        <div class="option age">
-            <span>年龄</span><input class="input" />
-            <font color="red">年龄必须是一个大于0的整数</font>
-        </div>
-        <div class="option sex">
-            <span>性别</span>
-            <label><input name="sex" type="radio" value="1" /> 男</label>
-            <label><input name="sex" type="radio" value="0" /> 女</label>
-        </div>
-        <div class="option email">
-            <span>Email</span><input class="input" />
-            <font color="red">请提供一个正确的Email</font>
-        </div>
-        <div class="operate">
-            <span class="submit">确定</span><span class="cancel">取消</span>
-        </div>
+        <ul class="items">
+            <li>
+                <div class="info name">
+                    <span class="info-type">姓名</span>
+                    <div class="info-input">
+                        <input class="input" />
+                        <font color="red">姓名不能为空</font>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="info age">
+                    <span class="info-type">年龄</span>
+                    <div class="info-input">
+                        <input class="input" />
+                        <font color="red">年龄必须是一个大于0的整数</font>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="info sex">
+                    <span class="info-type">性别</span>
+                    <div class="info-input">
+                        <label><input name="sex" type="radio" value="1" /> 男</label>
+                        <label><input name="sex" type="radio" value="0" /> 女</label>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="info email">
+                    <span class="info-type">Email</span>
+                    <div class="info-input">
+                        <input class="input" />
+                        <font color="red">请提供一个正确的Email</font>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="operate">
+                    <span class="submit">确定</span><span class="cancel">取消</span>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 </template>
-<style>
+<style scoped>
 .layer {
     position: fixed;
     text-align: center;
@@ -34,52 +57,59 @@
     height: 100%;
     top: 0;
     left: 0;
-    text-align: center;
 }
-.layer .shadow {
+.shadow {
     position: absolute;
+    z-index: 0;
     width: 100%;
     height: 100%;
     background-color: #000;
     opacity: 0.6;
-    z-index: 0;
 }
-.layer .create {
+.create {
     position: relative;
+    z-index: 1;
     display: inline-block;
     width: 600px;
-    height: 400px;
     top: 100px;
+    padding: 20px;
     background-color: #fff;
-    z-index: 1;
-}
-.layer .create {
     text-align: left;
-    color: #333333;
+    color: #333;
 }
-.layer .create div {
+.items {
+    padding: 0;
+    margin: 0;
+}
+.items li {
+    list-style: none;
     padding: 10px;
     font-size: 18px;
-    table-layout: fixed;
-    box-sizing: border-box;
 }
-.layer .option span {
+.info-type {
     display: inline-block;
     width: 100px   
 }
-.layer .create .input {
+.info-input {
+    width: 100%;
+}
+.info {
+    display: flex;
+}
+.info .input {
     outline: none;
     font-size: 18px;
     color: #333;
-    width: 440px;    
+    width: 100%;
+    box-sizing:border-box
 }
-.layer .create .title {
+.create .title {
     font-size: 24px;
 }
-.layer .create .email {
+.email .info-type {
     font-weight: bold;
 }
-.layer .create .operate {
+.operate {
     text-align: right;
     padding-right: 27px;
 }
