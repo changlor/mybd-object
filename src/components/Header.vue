@@ -5,9 +5,9 @@
 </template>
 <style>
 .header {
-    padding: 60px;
+    padding: 30px;
     background-color: #23b4f9;
     color: #fff;
-    font-size: 28px;
+    font-size: 26px;
 }
 </style>

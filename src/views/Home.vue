@@ -4,11 +4,11 @@
     <main class="body">
         <table>
             <tr class="first-row">
-                <th>姓名</th>
-                <th>年龄</th>
-                <th>性别</th>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
                 <th>Email</th>
-                <th>操作</th>
+                <td>操作</td>
             </tr>
             <tr v-for="person in persons">
                 <td>{{ person.name }}</td>
@@ -30,7 +30,7 @@
     <div class="layer">
         <!-- <Create></Create> -->
         <!-- <Modify></Modify> -->
-        <Delete></Delete>
+        <!-- <Delete></Delete> -->
     </div>
 </div>
 </template>
@@ -58,22 +58,17 @@ main.body {
     padding: 80px;
     margin: 0 160px;
 }
-tr {
-    border-bottom: 2px solid #cccccc;
-    font-size: 18px;
-    height: 60px;
-    color: #333333;
-}
 table {
     border-collapse: collapse;
     width: 100%;
 }
-td {
-    text-align: center;
+tr {
+    border-bottom: 1px solid #cccccc;
+    font-size: 17px;
+    height: 40px;
+    color: #333333;
 }
-th {
-    padding: 0 20px;
-}
+
 tr:hover {
     background-color: #fffef5;
 }
@@ -84,10 +79,12 @@ tr:hover span {
 tr:hover span:hover {
     opacity: 1;
 }
+td {
+    text-align: center;
+}
 .first-row {
-    height: 66px;
-    font-size: 20px;
-    border-top: 2px solid #cccccc;
+    font-size: 18px;
+    border-top: 1px solid #cccccc;
     border-bottom: 0;
     background-color: #dbf3ff;
 }
