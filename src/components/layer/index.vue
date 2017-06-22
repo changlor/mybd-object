@@ -2,7 +2,9 @@
 <div>
     <div v-if="result.isShow" class="layer">
         <div class="shadow"></div>
-        <Modify v-on:operate="operate"></Modify>
+        <Modify v-if="result.isModify" v-on:operate="operate"></Modify>
+        <Delete v-if="result.isDelete" v-on:operate="operate"></Delete>
+        <Create v-if="result.isCreate" v-on:operate="operate"></Create>
     </div>
 </div>
 </template>
@@ -15,14 +17,17 @@ export default {
     data () {
         return {
             result: {
-                isShow: true,
+                isShow: false,
+                isModify: false,
+                isDelete: false,
+                isCreate: false,
             }
         }
     },
     methods: {
         operate (result) {
             this.result.isShow = result.isShow;
-        }
+        },
     },
     mounted () {
         // console.log(this.event)
@@ -30,6 +35,24 @@ export default {
     props: ['event'],
     components: {
         Modify, Delete, Create
+    },
+    watch: {
+        'event.count' () {
+            switch (this.event.type) {
+                case 'modify':
+                    this.result.isShow = true;
+                    this.result.isModify = true;
+                    break;
+                case 'delete':
+                    this.result.isShow = true;
+                    this.result.isDelete = true;
+                case 'create':
+                    this.result.isShow = true;
+                    this.result.isCreate = true;
+                default:
+                    break;
+            }
+        }
     }
 }
 </script>
