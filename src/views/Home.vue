@@ -58,11 +58,11 @@ export default {
         },
         layerDelete () {
             this.payload.type = 'delete';
-            this.payload.count++;  
+            this.payload.count++;
         },
         layerCreate () {
             this.payload.type = 'create';
-            this.payload.count++;  
+            this.payload.count++;
         }
     },
     components: { Banner, Copyright, Layer }

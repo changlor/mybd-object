@@ -1,7 +1,7 @@
 <template>
-<div class="create">
+<section class="layer">
     <div class="title">
-        <span>修改人员信息</span><div class="cancel" v-on:click="operate">X</div>
+        <span>修改人员信息</span><div class="layer-cancel" v-on:click="layerCancel">X</div>
     </div>
     <ul class="items">
         <li>
@@ -43,46 +43,30 @@
         </li>
         <li>
             <div class="operate">
-                <span class="submit">确定</span><span class="cancel" v-on:click="operate">取消</span>
+                <span class="submit" v-on:click="layerSubmit">确定</span><span class="cancel" v-on:click="layerCancel">取消</span>
             </div>
         </li>
     </ul>
-</div>
+</section>
 </template>
 <script>
 export default {
     methods: {
-        operate () {
-            this.$emit('operate', { isShow: false });
-        }
+        layerCancel () {
+            this.$emit('operate', {
+                isShow: false
+            });
+        },
+        layerSubmit () {
+            this.$emit('operate', {
+                isShow: false
+            });
+        },
     }
 }
 </script>
 <style scoped>
 @import '../../assets/css/layer.css';
-.create {
-    position: relative;
-    z-index: 1;
-    display: inline-block;
-    width: 600px;
-    top: 100px;
-    padding: 20px;
-    background-color: #fff;
-    text-align: left;
-    color: #333;
-    box-shadow: 1px 2px 1px #666;
-}
-.create .title {
-    font-size: 24px;
-    margin-bottom: 25px;
-    display: flex;
-}
-.title .cancel {
-    flex: 1;
-    text-align: right;
-    font-size: 35px;
-    color: #c2c2c2;
-}
 .email .info-type {
     font-weight: bold;
 }

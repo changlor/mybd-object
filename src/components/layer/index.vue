@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div v-if="result.isShow" class="layer">
+    <div v-if="result.isShow" class="layer-wrap">
         <div class="shadow"></div>
         <Modify v-if="result.isModify" v-on:operate="operate"></Modify>
         <Delete v-if="result.isDelete" v-on:operate="operate"></Delete>
@@ -26,8 +26,14 @@ export default {
     },
     methods: {
         operate (result) {
-            this.result.isShow = result.isShow;
+            this.result.isShow = false;
         },
+        cancelAllLayer () {
+            this.result.isShow = false;
+            this.result.isModify = false;
+            this.result.isDelete = false;
+            this.result.isCreate = false;
+        }
     },
     mounted () {
         // console.log(this.event)
@@ -40,15 +46,21 @@ export default {
         'event.count' () {
             switch (this.event.type) {
                 case 'modify':
+                    this.cancelAllLayer();
                     this.result.isShow = true;
                     this.result.isModify = true;
                     break;
                 case 'delete':
+                    this.cancelAllLayer();
+                    console.log(this.result)
                     this.result.isShow = true;
                     this.result.isDelete = true;
+                    break;
                 case 'create':
+                    this.cancelAllLayer();
                     this.result.isShow = true;
                     this.result.isCreate = true;
+                    break;
                 default:
                     break;
             }
@@ -57,7 +69,7 @@ export default {
 }
 </script>
 <style>
-.layer {
+.layer-wrap {
     position: fixed;
     text-align: center;
     width: 100%;
