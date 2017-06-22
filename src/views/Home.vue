@@ -28,18 +28,14 @@
     </main>
     <Copyright></Copyright>
     <div class="layer">
-        <!-- <Create></Create> -->
-        <!-- <Modify></Modify> -->
-        <!-- <Delete></Delete> -->
+        <Layer event="test"></Layer>
     </div>
 </div>
 </template>
 <script>
-import Banner from '../components/Header';
-import Copyright from '../components/Footer';
-import Create from '../components/Create';
-import Modify from '../components/Modify';
-import Delete from '../components/Delete';
+import Banner from '../components/header';
+import Copyright from '../components/footer';
+import Layer from '../components/layer';
 
 export default {
     data () {
@@ -50,7 +46,7 @@ export default {
             ]
         };
     },
-    components: { Banner, Copyright, Create, Modify, Delete }
+    components: { Banner, Copyright, Layer }
 }
 </script>
 <style scoped>

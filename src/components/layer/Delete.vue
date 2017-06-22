@@ -1,23 +1,20 @@
 <template>
-<div class="layer">
-    <div class="shadow"></div>
-    <div class="create">
-        <div class="title">
-            <span>确定删除人员</span><div class="cancel">X</div>
-        </div>
-        <ul class="items">
-            <li>
-                <div class="info span">
-                    确定要删除指定的人员信息吗
-                </div>
-            </li>
-            <li>
-                <div class="operate">
-                    <span class="submit">确定</span><span class="cancel">取消</span>
-                </div>
-            </li>
-        </ul>
+<div class="create">
+    <div class="title">
+        <span>确定删除人员</span><div class="cancel">X</div>
     </div>
+    <ul class="items">
+        <li>
+            <div class="info span">
+                确定要删除指定的人员信息吗
+            </div>
+        </li>
+        <li>
+            <div class="operate">
+                <span class="submit">确定</span><span class="cancel">取消</span>
+            </div>
+        </li>
+    </ul>
 </div>
 </template>
 <style scoped>
