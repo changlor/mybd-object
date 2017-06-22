@@ -10,14 +10,14 @@
                 <th>Email</th>
                 <td>操作</td>
             </tr>
-            <tr v-for="person in persons">
+            <tr v-for="(person, index) in persons">
                 <td>{{ person.name }}</td>
                 <td>{{ person.age }}</td>
                 <td>{{ person.sex }}</td>
                 <td>{{ person.email }}</td>
                 <td>
-                    <span class="modify" v-on:click="layerModify">修改</span>
-                    <span class="delete" v-on:click="layerDelete">删除</span>
+                    <span class="modify" v-on:click="layerModify(index)">修改</span>
+                    <span class="delete" v-on:click="layerDelete(index)">删除</span>
                 </td>
             </tr>
             <tr class="last-row">
@@ -42,8 +42,8 @@ export default {
     data () {
         return {
             persons: [
-                { name: 'James Bond', age: 30, sex: '男', email: 'james.bond@secreagent.com' },
-                { name: 'Angelina Jolie', age: 40, sex: '女', email: 'i-dont-tell-anyone@somewhere' }
+                { name: 'James Bond', age: 30, sex: 'm', email: 'james.bond@secreagent.com' },
+                { name: 'Angelina Jolie', age: 40, sex: 'f', email: 'i-dont-tell-anyone@somewhere' }
             ],
             payload: {
                 type: '',
@@ -52,15 +52,21 @@ export default {
         };
     },
     methods: {
-        layerModify () {
+        layerModify (index) {
+            this.payload.persons = this.persons;
+            this.payload.index = index;
             this.payload.type = 'modify';
             this.payload.count++;
         },
-        layerDelete () {
+        layerDelete (index) {
+            this.payload.persons = this.persons;
+            this.payload.index = index;
             this.payload.type = 'delete';
             this.payload.count++;
         },
         layerCreate () {
+            this.payload.persons = this.persons;
+            this.payload.index = index;
             this.payload.type = 'create';
             this.payload.count++;
         }

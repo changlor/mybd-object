@@ -8,7 +8,7 @@
             <div class="info name">
                 <span class="info-type">姓名</span>
                 <div class="info-input">
-                    <input class="input" />
+                    <input class="input" v-bind:value="payload.persons[payload.index].name" />
                     <font color="red">&nbsp;</font>
                 </div>
             </div>
@@ -17,7 +17,7 @@
             <div class="info age">
                 <span class="info-type">年龄</span>
                 <div class="info-input">
-                    <input class="input" />
+                    <input class="input" v-bind:value="payload.persons[payload.index].age" />
                     <font color="red">&nbsp;</font>
                 </div>
             </div>
@@ -26,8 +26,20 @@
             <div class="info sex">
                 <span class="info-type">性别</span>
                 <div class="info-input">
-                    <label><input name="sex" type="radio" value="1" /> 男</label>
-                    <label><input name="sex" type="radio" value="0" /> 女</label>
+                    <label>
+                    <input
+                        name="sex"
+                        type="radio"
+                        value="m"
+                        v-bind:checked="payload.persons[payload.index].sex == 'm' ? 'checked' : ''"/>
+                        男
+                    </label>
+                    <label><input
+                        name="sex"
+                        type="radio"
+                        v-bind:checked="payload.persons[payload.index].sex == 'f' ? 'checked' : ''"/>
+                        女
+                    </label>
                     <div>&nbsp;</div>
                 </div>
             </div>
@@ -36,7 +48,7 @@
             <div class="info email">
                 <span class="info-type">Email</span>
                 <div class="info-input">
-                    <input class="input" />
+                    <input class="input" v-bind:value="payload.persons[payload.index].email" />
                     <font color="red">&nbsp;</font>
                 </div>
             </div>
@@ -51,6 +63,7 @@
 </template>
 <script>
 export default {
+    props: ['payload'],
     methods: {
         layerCancel () {
             this.$emit('operate', {

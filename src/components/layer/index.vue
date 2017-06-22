@@ -2,7 +2,7 @@
 <div>
     <div v-if="result.isShow" class="layer-wrap">
         <div class="shadow"></div>
-        <Modify v-if="result.isModify" v-on:operate="operate"></Modify>
+        <Modify v-if="result.isModify" v-bind:payload="payload" v-on:operate="operate"></Modify>
         <Delete v-if="result.isDelete" v-on:operate="operate"></Delete>
         <Create v-if="result.isCreate" v-on:operate="operate"></Create>
     </div>
@@ -21,7 +21,8 @@ export default {
                 isModify: false,
                 isDelete: false,
                 isCreate: false,
-            }
+            },
+            payload: {},
         }
     },
     methods: {
@@ -35,9 +36,6 @@ export default {
             this.result.isCreate = false;
         }
     },
-    mounted () {
-        // console.log(this.event)
-    },
     props: ['event'],
     components: {
         Modify, Delete, Create
@@ -49,17 +47,20 @@ export default {
                     this.cancelAllLayer();
                     this.result.isShow = true;
                     this.result.isModify = true;
+                    this.payload = { persons: this.event.persons, index: this.event.index };
+                    console.log(this.payload)
                     break;
                 case 'delete':
                     this.cancelAllLayer();
-                    console.log(this.result)
                     this.result.isShow = true;
                     this.result.isDelete = true;
+                    this.payload = { persons: this.result.persons, index: this.result.index };
                     break;
                 case 'create':
                     this.cancelAllLayer();
                     this.result.isShow = true;
                     this.result.isCreate = true;
+                    this.payload = { persons: this.result.persons, index: this.result.index };
                     break;
                 default:
                     break;
