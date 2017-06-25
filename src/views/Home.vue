@@ -16,8 +16,8 @@
                 <td>{{ person.sex }}</td>
                 <td>{{ person.email }}</td>
                 <td>
-                    <span class="modify" v-on:click="layerModify(index)">修改</span>
-                    <span class="delete" v-on:click="layerDelete(index)">删除</span>
+                    <span class="modify" v-on:click="layerCreate('modify', index, person)">修改</span>
+                    <span class="delete" v-on:click="layerCreate('delete', index, person)">删除</span>
                 </td>
             </tr>
             <tr class="last-row">
@@ -25,12 +25,12 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td><span class="create" v-on:click="layerCreate">添加新成员</span></td>
+                <td><span class="create" v-on:click="layerCreate('create')">添加新成员</span></td>
             </tr>
         </table>
     </main>
     <Copyright></Copyright>
-    <Layer v-on:operate="layerOperate" v-bind:event="payload"></Layer>
+    <Layer v-on:operate="layerOperate" v-bind:payload="payload"></Layer>
 </div>
 </template>
 <script>
@@ -43,30 +43,16 @@ export default {
         return {
             persons: [
                 { name: 'James Bond', age: 30, sex: 'm', email: 'james.bond@secreagent.com' },
-                { name: 'Angelina Jolie', age: 40, sex: 'f', email: 'i-dont-tell-anyone@somewhere' }
+                { name: 'Angelina Jolie', age: 40, sex: 'f', email: 'i-dont-tell-anyone@somewhere.com' }
             ],
             payload: {
-                type: '',
-                count: 0,
+                type: '', count: 0,
             },
         };
     },
     methods: {
-        layerModify (index) {
-            this.payload.persons = this.persons;
-            this.payload.index = index;
-            this.payload.type = 'modify';
-            this.payload.count++;
-        },
-        layerDelete (index) {
-            this.payload.persons = this.persons;
-            this.payload.index = index;
-            this.payload.type = 'delete';
-            this.payload.count++;
-        },
-        layerCreate () {
-            this.payload.persons = this.persons;
-            this.payload.type = 'create';
+        layerCreate (type, index, person) {
+            Object.assign(this.payload, { person, index, type });
             this.payload.count++;
         },
         layerOperate (res) {

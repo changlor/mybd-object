@@ -16,45 +16,32 @@ import Create from './Create';
 export default {
     data () {
         return {
-            isShow: false,
-            isModify: false,
-            isDelete: false,
-            isCreate: false,
-            persons: [],
-            index: 0,
-            payload: {},
+            isShow: false, isModify: false, isDelete: false, isCreate: false,
+            index: 0, persons: [],
         }
     },
     methods: {
         operate (res) {
+            // 向父组件传递<修改|删除|新增>操作
             const { success, type, payload } = res;
             if (success) {
                 this.$emit('operate', { type, payload })
             }
+            // 关闭所有弹层
             this.cancelAllLayer();
-        },
-        cancelLayer (type) {
-            this[type] = false;
-            this.isShow = false;
         },
         cancelAllLayer () {
-            this.isShow = false;
-            this.isModify = false;
-            this.isDelete = false;
-            this.isCreate = false;
+            this.isShow = false; 
+            this.isModify = false; this.isDelete = false; this.isCreate = false;
         }
     },
-    props: ['event'],
-    components: {
-        Modify, Delete, Create
-    },
+    props: ['payload'],
+    components: { Modify, Delete, Create },
     watch: {
-        'event.count' () {
-            const { persons, index } = this.event;
-            this.payload = { persons, index };
+        'payload.count' () {
             this.cancelAllLayer();
             this.isShow = true;
-            switch (this.event.type) {
+            switch (this.payload.type) {
                 case 'modify':
                     this.isModify = true;
                     break;

@@ -22,7 +22,7 @@ export default {
     methods: {
         layerCancel () {
             this.$emit('operate', {
-                isShow: false
+                success: false,
             });
         },
         layerSubmit () {

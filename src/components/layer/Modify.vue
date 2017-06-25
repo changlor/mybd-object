@@ -31,12 +31,15 @@
                         name="sex"
                         type="radio"
                         value="m"
+                        v-model="person.sex"
                         v-bind:checked="person.sex == 'm' ? 'checked' : ''"/>
                         男
                     </label>
                     <label><input
                         name="sex"
                         type="radio"
+                        value="f"
+                        v-model="person.sex"
                         v-bind:checked="person.sex == 'f' ? 'checked' : ''"/>
                         女
                     </label>
@@ -81,9 +84,7 @@ export default {
         },
         layerCancel () {
             this.$emit('operate', {
-                type: 'modify',
                 success: false,
-                payload: this.person,
             });
         },
         layerSubmit () {
@@ -100,9 +101,9 @@ export default {
         },
     },
     mounted () {
-        const { index, persons } = this.payload;
+        const { index, person } = this.payload;
         this.index = index;
-        this.person = { ...persons[index] };
+        this.person = { ...person };
     },
 }
 </script>
