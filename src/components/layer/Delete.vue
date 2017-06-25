@@ -27,7 +27,9 @@ export default {
         },
         layerSubmit () {
             this.$emit('operate', {
-                isShow: false
+                type: 'delete',
+                success: true,
+                payload: { person: this.person, index: this.index },
             });
         }
     }

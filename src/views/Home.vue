@@ -30,7 +30,7 @@
         </table>
     </main>
     <Copyright></Copyright>
-    <Layer v-bind:event="payload"></Layer>
+    <Layer v-on:operate="layerOperate" v-bind:event="payload"></Layer>
 </div>
 </template>
 <script>
@@ -68,6 +68,22 @@ export default {
             this.payload.persons = this.persons;
             this.payload.type = 'create';
             this.payload.count++;
+        },
+        layerOperate (res) {
+            const { index, person } = res.payload;
+            switch (res.type) {
+                case 'modify':
+                    Object.assign(this.persons[index], person);
+                    break;
+                case 'create':
+                    this.persons.push(person);
+                    break;
+                case 'delete':
+                    this.persons.splice(index, 1);
+                    break;
+                default:
+                    break;
+            }
         }
     },
     components: { Banner, Copyright, Layer }

@@ -4,5 +4,8 @@ export default {
         'say': {
             Welcome: 'say',
         },
+        'validatePerson': {
+            Welcome: 'validatePerson',
+        }
     }
 }

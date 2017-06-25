@@ -27,13 +27,11 @@ export default {
     },
     methods: {
         operate (res) {
-            switch (res.type) {
-                case 'modify':
-                    this.cancelLayer('isModify');
-                    break;
-                default:
-                    break;
+            const { success, type, payload } = res;
+            if (success) {
+                this.$emit('operate', { type, payload })
             }
+            this.cancelAllLayer();
         },
         cancelLayer (type) {
             this[type] = false;
@@ -52,24 +50,19 @@ export default {
     },
     watch: {
         'event.count' () {
+            const { persons, index } = this.event;
+            this.payload = { persons, index };
+            this.cancelAllLayer();
+            this.isShow = true;
             switch (this.event.type) {
                 case 'modify':
-                    this.cancelAllLayer();
-                    this.isShow = true;
                     this.isModify = true;
-                    this.payload = { persons: this.event.persons, index: this.event.index };
                     break;
                 case 'delete':
-                    this.cancelAllLayer();
-                    this.isShow = true;
                     this.isDelete = true;
-                    this.payload = { persons: this.persons, index: this.index };
                     break;
                 case 'create':
-                    this.cancelAllLayer();
-                    this.isShow = true;
                     this.isCreate = true;
-                    this.payload = { persons: this.persons, index: this.index };
                     break;
                 default:
                     break;

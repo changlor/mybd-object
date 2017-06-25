@@ -71,41 +71,32 @@ export default {
             error: {
                 age: '&nbsp;', name: '&nbsp;', email: '&nbsp;',
             },
-            index: 0,
+            index: 0, isPass: false,
         }
     },
     props: ['payload'],
     methods: {
+        bubble (subscription) {
+            this.$store.dispatch('bubbleDelegation', { subscription, page: this});
+        },
         layerCancel () {
             this.$emit('operate', {
                 type: 'modify',
+                success: false,
                 payload: this.person,
             });
         },
         layerSubmit () {
-            let isPass = true;
-            this.error.email = '&nbsp;';
-            if (!(this.person.email + '').match(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)) {
-                isPass = false;
-                this.error.email = '请提供一个正确的Email';
-            }
-            this.error.name = '&nbsp;';
-            if ((this.person.name + '').trim() == '') {
-                isPass = false;
-                this.error.name = '姓名不能为空';
-            }
-            this.error.age = '&nbsp;';
-            if (!(this.person.age > 0)) {
-                isPass = false;
-                console.log(1)
-                this.error.age = '年龄必须是一个大于0的整数';
-            }
-            if (isPass) {
-                this.$emit('operate', {
-                    type: 'modify',
-                    payload: this.person,
-                });
-            }
+            this.bubble('validatePerson');
+            this.$nextTick(() => {
+                if (this.isPass) {
+                    this.$emit('operate', {
+                        type: 'modify',
+                        success: true,
+                        payload: { person: this.person, index: this.index },
+                    });
+                }
+            });
         },
     },
     mounted () {
@@ -113,9 +104,6 @@ export default {
         this.index = index;
         this.person = { ...persons[index] };
     },
-    watch: {
-
-    }
 }
 </script>
 <style scoped>
