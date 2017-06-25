@@ -66,7 +66,6 @@ export default {
         },
         layerCreate () {
             this.payload.persons = this.persons;
-            this.payload.index = index;
             this.payload.type = 'create';
             this.payload.count++;
         }

@@ -1,10 +1,10 @@
 <template>
 <div>
-    <div v-if="result.isShow" class="layer-wrap">
+    <div v-if="isShow" class="layer-wrap">
         <div class="shadow"></div>
-        <Modify v-if="result.isModify" v-bind:payload="payload" v-on:operate="operate"></Modify>
-        <Delete v-if="result.isDelete" v-on:operate="operate"></Delete>
-        <Create v-if="result.isCreate" v-on:operate="operate"></Create>
+        <Modify v-if="isModify" v-bind:payload="payload" v-on:operate="operate"></Modify>
+        <Delete v-if="isDelete" v-on:operate="operate"></Delete>
+        <Create v-if="isCreate" v-on:operate="operate"></Create>
     </div>
 </div>
 </template>
@@ -16,24 +16,34 @@ import Create from './Create';
 export default {
     data () {
         return {
-            result: {
-                isShow: false,
-                isModify: false,
-                isDelete: false,
-                isCreate: false,
-            },
+            isShow: false,
+            isModify: false,
+            isDelete: false,
+            isCreate: false,
+            persons: [],
+            index: 0,
             payload: {},
         }
     },
     methods: {
-        operate (result) {
-            this.result.isShow = false;
+        operate (res) {
+            switch (res.type) {
+                case 'modify':
+                    this.cancelLayer('isModify');
+                    break;
+                default:
+                    break;
+            }
+        },
+        cancelLayer (type) {
+            this[type] = false;
+            this.isShow = false;
         },
         cancelAllLayer () {
-            this.result.isShow = false;
-            this.result.isModify = false;
-            this.result.isDelete = false;
-            this.result.isCreate = false;
+            this.isShow = false;
+            this.isModify = false;
+            this.isDelete = false;
+            this.isCreate = false;
         }
     },
     props: ['event'],
@@ -45,22 +55,21 @@ export default {
             switch (this.event.type) {
                 case 'modify':
                     this.cancelAllLayer();
-                    this.result.isShow = true;
-                    this.result.isModify = true;
+                    this.isShow = true;
+                    this.isModify = true;
                     this.payload = { persons: this.event.persons, index: this.event.index };
-                    console.log(this.payload)
                     break;
                 case 'delete':
                     this.cancelAllLayer();
-                    this.result.isShow = true;
-                    this.result.isDelete = true;
-                    this.payload = { persons: this.result.persons, index: this.result.index };
+                    this.isShow = true;
+                    this.isDelete = true;
+                    this.payload = { persons: this.persons, index: this.index };
                     break;
                 case 'create':
                     this.cancelAllLayer();
-                    this.result.isShow = true;
-                    this.result.isCreate = true;
-                    this.payload = { persons: this.result.persons, index: this.result.index };
+                    this.isShow = true;
+                    this.isCreate = true;
+                    this.payload = { persons: this.persons, index: this.index };
                     break;
                 default:
                     break;

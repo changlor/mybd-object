@@ -8,8 +8,8 @@
             <div class="info name">
                 <span class="info-type">姓名</span>
                 <div class="info-input">
-                    <input class="input" v-bind:value="payload.persons[payload.index].name" />
-                    <font color="red">&nbsp;</font>
+                    <input class="input" v-bind:value="person.name" v-model="person.name" />
+                    <font color="red" v-html="error.name"></font>
                 </div>
             </div>
         </li>
@@ -17,8 +17,8 @@
             <div class="info age">
                 <span class="info-type">年龄</span>
                 <div class="info-input">
-                    <input class="input" v-bind:value="payload.persons[payload.index].age" />
-                    <font color="red">&nbsp;</font>
+                    <input class="input" v-bind:value="person.age" v-model="person.age" />
+                    <font color="red" v-html="error.age"></font>
                 </div>
             </div>
         </li>
@@ -31,13 +31,13 @@
                         name="sex"
                         type="radio"
                         value="m"
-                        v-bind:checked="payload.persons[payload.index].sex == 'm' ? 'checked' : ''"/>
+                        v-bind:checked="person.sex == 'm' ? 'checked' : ''"/>
                         男
                     </label>
                     <label><input
                         name="sex"
                         type="radio"
-                        v-bind:checked="payload.persons[payload.index].sex == 'f' ? 'checked' : ''"/>
+                        v-bind:checked="person.sex == 'f' ? 'checked' : ''"/>
                         女
                     </label>
                     <div>&nbsp;</div>
@@ -48,8 +48,8 @@
             <div class="info email">
                 <span class="info-type">Email</span>
                 <div class="info-input">
-                    <input class="input" v-bind:value="payload.persons[payload.index].email" />
-                    <font color="red">&nbsp;</font>
+                    <input class="input" v-bind:value="person.email" v-model="person.email" />
+                    <font color="red" v-html="error.email"></font>
                 </div>
             </div>
         </li>
@@ -63,18 +63,58 @@
 </template>
 <script>
 export default {
+    data () {
+        return {
+            person: {
+                age: 0, email: '', name: '', sex: 'm'
+            },
+            error: {
+                age: '&nbsp;', name: '&nbsp;', email: '&nbsp;',
+            },
+            index: 0,
+        }
+    },
     props: ['payload'],
     methods: {
         layerCancel () {
             this.$emit('operate', {
-                isShow: false
+                type: 'modify',
+                payload: this.person,
             });
         },
         layerSubmit () {
-            this.$emit('operate', {
-                isShow: false
-            });
+            let isPass = true;
+            this.error.email = '&nbsp;';
+            if (!(this.person.email + '').match(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)) {
+                isPass = false;
+                this.error.email = '请提供一个正确的Email';
+            }
+            this.error.name = '&nbsp;';
+            if ((this.person.name + '').trim() == '') {
+                isPass = false;
+                this.error.name = '姓名不能为空';
+            }
+            this.error.age = '&nbsp;';
+            if (!(this.person.age > 0)) {
+                isPass = false;
+                console.log(1)
+                this.error.age = '年龄必须是一个大于0的整数';
+            }
+            if (isPass) {
+                this.$emit('operate', {
+                    type: 'modify',
+                    payload: this.person,
+                });
+            }
         },
+    },
+    mounted () {
+        const { index, persons } = this.payload;
+        this.index = index;
+        this.person = { ...persons[index] };
+    },
+    watch: {
+
     }
 }
 </script>
