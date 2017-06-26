@@ -8,6 +8,8 @@
 
 ## 运行
 ```
+cd path/to/your/path
+npm install
 npm run dev
 ```
 
