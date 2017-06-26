@@ -69,7 +69,7 @@ class User {
         const body = `id=${personId}&name=${name}&age=${age}&gender=${gender}&email=${email}`;
         Xhr.fetch('/api/edit-person', {
             headers:{
-                'Content-Type': 'application/x-www-form-urlencoded'  
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             method: 'POST',
             body,
