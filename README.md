@@ -16,6 +16,7 @@ npm run dev
 ## 内容
 - 主页为/home，位于/src/views/home.vue
 - 组件位于/src/components
+
 1.其中header位于/src/components/header
 2.footer位于/src/components/footer
 3.弹层位于/src/components/layer，index包含四个子弹层，create，modify，delete，errors
