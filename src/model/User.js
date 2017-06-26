@@ -9,6 +9,12 @@ class User {
             if (res.code === 200) {
                 page.persons = res.data;
             }
+            if (res.code === 500) {
+                page.layerErrors(res.data.error);
+            }
+        })
+        .catch(() => {
+            page.layerErrors('未知错误！');
         });
     }
 
@@ -26,6 +32,12 @@ class User {
             if (res.code === 200) {
                 page.persons.push(page.person);
             }
+            if (res.code === 500) {
+                page.layerErrors(res.data.error);
+            }
+        })
+        .catch(() => {
+            page.layerErrors('未知错误！');
         });
     }
 
@@ -42,13 +54,18 @@ class User {
             if (res.code === 200) {
                 page.persons.splice(page.index, 1);
             }
+            if (res.code === 500) {
+                page.layerErrors(res.data.error);
+            }
+        })
+        .catch(() => {
+            page.layerErrors('未知错误！');
         });
     }
 
     static updatePerson (page, component, id) {
         const { name, age, gender, email } = page.person;
         const personId = page.person.id;
-        console.log(personId)
         const body = `id=${personId}&name=${name}&age=${age}&gender=${gender}&email=${email}`;
         Xhr.fetch('/api/edit-person', {
             headers:{
@@ -61,6 +78,12 @@ class User {
             if (res.code === 200) {
                 Object.assign(page.persons[page.index], page.person);
             }
+            if (res.code === 500) {
+                page.layerErrors(res.data.error);
+            }
+        })
+        .catch(() => {
+            page.layerErrors('未知错误！');
         });
     }
 }

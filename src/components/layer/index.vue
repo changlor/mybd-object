@@ -5,6 +5,7 @@
         <Modify v-if="isModify" v-bind:payload="payload" v-on:operate="operate"></Modify>
         <Delete v-if="isDelete" v-bind:payload="payload" v-on:operate="operate"></Delete>
         <Create v-if="isCreate" v-on:operate="operate"></Create>
+        <Errors v-if="isErrors" v-bind:errors="errors" v-on:operate="operate"></Errors>
     </div>
 </div>
 </template>
@@ -12,12 +13,13 @@
 import Modify from './Modify';
 import Delete from './Delete';
 import Create from './Create';
+import Errors from './Errors';
 
 export default {
     data () {
         return {
-            isShow: false, isModify: false, isDelete: false, isCreate: false,
-            index: 0, persons: [],
+            isShow: false, isModify: false, isDelete: false, isCreate: false, isErrors: false,
+            index: 0, persons: [], errors: '',
         }
     },
     methods: {
@@ -32,11 +34,14 @@ export default {
         },
         cancelAllLayer () {
             this.isShow = false; 
-            this.isModify = false; this.isDelete = false; this.isCreate = false;
+            this.isModify = false;
+            this.isDelete = false;
+            this.isCreate = false;
+            this.isErrors = false;
         }
     },
     props: ['payload'],
-    components: { Modify, Delete, Create },
+    components: { Modify, Delete, Create, Errors },
     watch: {
         'payload.count' () {
             this.cancelAllLayer();
@@ -50,6 +55,10 @@ export default {
                     break;
                 case 'create':
                     this.isCreate = true;
+                    break;
+                case 'errors':
+                    this.isErrors = true;
+                    this.errors = this.payload.errors;
                     break;
                 default:
                     break;

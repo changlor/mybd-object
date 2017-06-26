@@ -13,7 +13,7 @@
             <tr v-for="(person, index) in persons">
                 <td>{{ person.name }}</td>
                 <td>{{ person.age }}</td>
-                <td>{{ person.gender }}</td>
+                <td>{{ person.gender | gender }}</td>
                 <td>{{ person.email }}</td>
                 <td>
                     <span class="modify" v-on:click="layerCreate('modify', index, person)">修改</span>
@@ -43,15 +43,25 @@ export default {
         return {
             persons: [],
             payload: {
-                type: '', count: 0,
+                type: '', count: 0, errors: '',
             },
             person: {}, index: 0,
         };
+    },
+    filters: {
+        gender: function (value) {
+            return value == 'm' ? '男' : '女';
+        }
     },
     mounted () {
         this.bubble('selectPersons');
     },
     methods: {
+        layerErrors (errors) {
+            this.payload.errors = errors;
+            this.payload.type = 'errors';
+            this.payload.count++;
+        },
         bubble (subscription) {
             this.$store.dispatch('bubbleDelegation', { subscription, page: this});
         },
