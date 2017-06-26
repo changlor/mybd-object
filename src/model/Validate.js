@@ -1,10 +1,4 @@
-class Welcome {
-    /*
-     * @description: 创建一个新评论
-     */
-    static say () {
-        console.log('hello world')
-    }
+class Validate {
     static validatePerson (page, component, id) {
         page.isPass = true;
         page.person.age -= 0;
@@ -25,4 +19,4 @@ class Welcome {
     }
 }
 
-export default Welcome;
+export default Validate;

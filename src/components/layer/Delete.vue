@@ -19,6 +19,12 @@
 </template>
 <script>
 export default {
+    data () {
+        return {
+            person: {}, index: 0,
+        }
+    },
+    props: ['payload'],
     methods: {
         layerCancel () {
             this.$emit('operate', {
@@ -32,7 +38,12 @@ export default {
                 payload: { person: this.person, index: this.index },
             });
         }
-    }
+    },
+    mounted () {
+        const { index, person } = this.payload;
+        this.index = index;
+        this.person = { ...person };
+    },
 }
 </script>
 <style scoped>

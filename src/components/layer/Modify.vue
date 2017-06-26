@@ -23,24 +23,24 @@
             </div>
         </li>
         <li>
-            <div class="info sex">
+            <div class="info gender">
                 <span class="info-type">性别</span>
                 <div class="info-input">
                     <label>
                     <input
-                        name="sex"
+                        name="gender"
                         type="radio"
                         value="m"
-                        v-model="person.sex"
-                        v-bind:checked="person.sex == 'm' ? 'checked' : ''"/>
+                        v-model="person.gender"
+                        v-bind:checked="person.gender == 'm' ? 'checked' : ''"/>
                         男
                     </label>
                     <label><input
-                        name="sex"
+                        name="gender"
                         type="radio"
                         value="f"
-                        v-model="person.sex"
-                        v-bind:checked="person.sex == 'f' ? 'checked' : ''"/>
+                        v-model="person.gender"
+                        v-bind:checked="person.gender == 'f' ? 'checked' : ''"/>
                         女
                     </label>
                     <div>&nbsp;</div>
@@ -69,7 +69,7 @@ export default {
     data () {
         return {
             person: {
-                age: 0, email: '', name: '', sex: 'm'
+                age: 0, email: '', name: '', gender: 'm'
             },
             error: {
                 age: '&nbsp;', name: '&nbsp;', email: '&nbsp;',

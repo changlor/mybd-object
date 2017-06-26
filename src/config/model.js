@@ -1,11 +1,20 @@
 export default {
-    models: ['Welcome'],
+    models: ['Validate', 'User'],
     subscriptions: {
-        'say': {
-            Welcome: 'say',
-        },
         'validatePerson': {
-            Welcome: 'validatePerson',
+            Validate: 'validatePerson',
+        },
+        'selectPersons': {
+            User: 'selectPersons',
+        },
+        'createPerson': {
+            User: 'createPerson',
+        },
+        'deletePerson': {
+            User: 'deletePerson',
+        },
+        'updatePerson': {
+            User: 'updatePerson',
         }
     }
 }

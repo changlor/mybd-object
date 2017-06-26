@@ -13,7 +13,7 @@
             <tr v-for="(person, index) in persons">
                 <td>{{ person.name }}</td>
                 <td>{{ person.age }}</td>
-                <td>{{ person.sex }}</td>
+                <td>{{ person.gender }}</td>
                 <td>{{ person.email }}</td>
                 <td>
                     <span class="modify" v-on:click="layerCreate('modify', index, person)">修改</span>
@@ -41,31 +41,36 @@ import Layer from '../components/layer';
 export default {
     data () {
         return {
-            persons: [
-                { name: 'James Bond', age: 30, sex: 'm', email: 'james.bond@secreagent.com' },
-                { name: 'Angelina Jolie', age: 40, sex: 'f', email: 'i-dont-tell-anyone@somewhere.com' }
-            ],
+            persons: [],
             payload: {
                 type: '', count: 0,
             },
+            person: {}, index: 0,
         };
     },
+    mounted () {
+        this.bubble('selectPersons');
+    },
     methods: {
+        bubble (subscription) {
+            this.$store.dispatch('bubbleDelegation', { subscription, page: this});
+        },
         layerCreate (type, index, person) {
             Object.assign(this.payload, { person, index, type });
             this.payload.count++;
         },
         layerOperate (res) {
-            const { index, person } = res.payload;
+            this.index = res.payload.index;
+            this.person = res.payload.person
             switch (res.type) {
                 case 'modify':
-                    Object.assign(this.persons[index], person);
+                    this.bubble('updatePerson');
                     break;
                 case 'create':
-                    this.persons.push(person);
+                    this.bubble('createPerson');
                     break;
                 case 'delete':
-                    this.persons.splice(index, 1);
+                    this.bubble('deletePerson');
                     break;
                 default:
                     break;

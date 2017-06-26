@@ -3,7 +3,7 @@
     <div v-if="isShow" class="layer-wrap">
         <div class="shadow"></div>
         <Modify v-if="isModify" v-bind:payload="payload" v-on:operate="operate"></Modify>
-        <Delete v-if="isDelete" v-on:operate="operate"></Delete>
+        <Delete v-if="isDelete" v-bind:payload="payload" v-on:operate="operate"></Delete>
         <Create v-if="isCreate" v-on:operate="operate"></Create>
     </div>
 </div>
