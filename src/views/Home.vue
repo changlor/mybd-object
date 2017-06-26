@@ -16,8 +16,8 @@
                 <td>{{ person.gender | gender }}</td>
                 <td>{{ person.email }}</td>
                 <td>
-                    <span class="modify" v-on:click="layerCreate('modify', index, person)">修改</span>
-                    <span class="delete" v-on:click="layerCreate('delete', index, person)">删除</span>
+                    <span class="modify" v-on:click="layerCreate('modify', { index, person })">修改</span>
+                    <span class="delete" v-on:click="layerCreate('delete', { index, person })">删除</span>
                 </td>
             </tr>
             <tr class="last-row">
@@ -42,9 +42,11 @@ export default {
     data () {
         return {
             persons: [],
+            // 向子组件传递数据
             payload: {
                 type: '', count: 0, errors: '',
             },
+            // 此数据供model代码使用
             person: {}, index: 0,
         };
     },
@@ -57,18 +59,19 @@ export default {
         this.bubble('selectPersons');
     },
     methods: {
-        layerErrors (errors) {
-            this.payload.errors = errors;
-            this.payload.type = 'errors';
-            this.payload.count++;
-        },
+        // 此函数用于向本框架传递事件
         bubble (subscription) {
             this.$store.dispatch('bubbleDelegation', { subscription, page: this});
         },
-        layerCreate (type, index, person) {
-            Object.assign(this.payload, { person, index, type });
+        // 弹出一个弹层
+        // 第一个参数为弹层类型，modify、delete、create，errors
+        // 第二个参数为传递给弹层的变量
+        layerCreate (type, payload) {
+            Object.assign(this.payload, payload);
+            this.payload.type = type;
             this.payload.count++;
         },
+        // 当子组件layer弹层发生确定或取消操作时触发，res为弹层内操作后的数据
         layerOperate (res) {
             this.index = res.payload.index;
             this.person = res.payload.person

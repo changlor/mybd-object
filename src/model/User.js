@@ -10,11 +10,11 @@ class User {
                 page.persons = res.data;
             }
             if (res.code === 500) {
-                page.layerErrors(res.data.error);
+                page.layerCreate('errors', { errors: res.data.error });
             }
         })
         .catch(() => {
-            page.layerErrors('未知错误！');
+            page.layerCreate('errors', { errors: '未知错误！' });
         });
     }
 
@@ -33,11 +33,11 @@ class User {
                 page.persons.push(page.person);
             }
             if (res.code === 500) {
-                page.layerErrors(res.data.error);
+                page.layerCreate('errors', { errors: res.data.error });
             }
         })
         .catch(() => {
-            page.layerErrors('未知错误！');
+            page.layerCreate('errors', { errors: '未知错误！' });
         });
     }
 
@@ -55,11 +55,11 @@ class User {
                 page.persons.splice(page.index, 1);
             }
             if (res.code === 500) {
-                page.layerErrors(res.data.error);
+                page.layerCreate('errors', { errors: res.data.error });
             }
         })
         .catch(() => {
-            page.layerErrors('未知错误！');
+            page.layerCreate('errors', { errors: '未知错误！' });
         });
     }
 
@@ -79,11 +79,11 @@ class User {
                 Object.assign(page.persons[page.index], page.person);
             }
             if (res.code === 500) {
-                page.layerErrors(res.data.error);
+                page.layerCreate('errors', { errors: res.data.error });
             }
         })
         .catch(() => {
-            page.layerErrors('未知错误！');
+            page.layerCreate('errors', { errors: '未知错误！' });
         });
     }
 }

@@ -79,6 +79,7 @@ export default {
     },
     props: ['payload'],
     methods: {
+        // 此函数用于向本框架传递事件
         bubble (subscription) {
             this.$store.dispatch('bubbleDelegation', { subscription, page: this});
         },
